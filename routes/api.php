@@ -21,3 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/user')->group(function(){
     Route::post('/login','api\v1\AppLoginController@authenticate');
 });
+
+Route::prefix('/catalog')->group(function(){
+    Route::get('/items','api\v1\AppCatalogController@getAllItems');
+});
+
+Route::prefix('/order')->group(function(){
+    Route::post('/checkout','api\v1\AppOrderController@checkoutOrder');
+});
+
+Route::fallback(function(){
+    return response()->json(['message' => 'Bad Request'], 400);
+});
