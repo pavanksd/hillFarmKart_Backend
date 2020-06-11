@@ -21,10 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/orderlist', 'OrderController@index')->name('orderlist.index');
-Route::post('/orderlist', 'OrderController@index')->name('orderlist.index');
-Route::get('/orderlist/{id?}','OrderController@show')->name('orderlist.show');
-Route::put('/order/markDelivered','OrderController@markDelivered');
-Route::put('/order/markCancelled','OrderController@markCancelled');
+Route::get('/orderlist', 'OrderController@index')->name('orderlist.index')->middleware('auth');
+Route::post('/orderlist', 'OrderController@index')->name('orderlist.index')->middleware('auth');
+Route::get('/orderlist/{id?}','OrderController@show')->name('orderlist.show')->middleware('auth');
+Route::put('/order/markDelivered','OrderController@markDelivered')->middleware('auth');
+Route::put('/order/markCancelled','OrderController@markCancelled')->middleware('auth');
 
-Route::get('/stocklist','StockController@index')->name('stocklist.index');
+Route::get('/stocklist','StockController@index')->name('stocklist.index')->middleware('auth');
