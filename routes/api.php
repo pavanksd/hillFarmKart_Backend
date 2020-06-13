@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/user')->group(function(){
     Route::post('/login','api\v1\AppLoginController@authenticate');
+    Route::post('/register','api\v1\AppLoginController@registerUser');
 });
 
 Route::prefix('/catalog')->group(function(){
