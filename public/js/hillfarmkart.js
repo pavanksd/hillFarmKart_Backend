@@ -75,7 +75,7 @@ function createItem(){
             try {
                 result = JSON.parse(data);
                 if(result['status']){
-                    $('#itemName','#itemName').val('');
+                    $('#itemName,#itemPrice').val('');
                     $('.alert-success').fadeIn();
                 } else {
                     $('.alert-danger').fadeIn()
