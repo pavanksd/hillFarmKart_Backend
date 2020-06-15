@@ -27,4 +27,9 @@ Route::get('/orderlist/{id?}','OrderController@show')->name('orderlist.show')->m
 Route::put('/order/markDelivered','OrderController@markDelivered')->middleware('auth');
 Route::put('/order/markCancelled','OrderController@markCancelled')->middleware('auth');
 
+Route::get('/catalog', 'CatalogController@index')->name('catalog.index')->middleware('auth');
+Route::get('/catalog/create', 'CatalogController@create')->name('catalog.create')->middleware('auth');
+Route::post('/catalog/store', 'CatalogController@store')->name('catalog.store')->middleware('auth');
+Route::post('/catalog/update', 'CatalogController@update')->name('catalog.update')->middleware('auth');
+
 Route::get('/stocklist','StockController@index')->name('stocklist.index')->middleware('auth');

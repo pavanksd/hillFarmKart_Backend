@@ -1,5 +1,5 @@
 function markDelivered(e){
-    let orderId = $(e).data('orderid');
+    const orderId = $(e).data('orderid');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -29,7 +29,7 @@ function markDelivered(e){
 
 function markCancelled(e){
 
-    let orderId = $(e).data('orderid');
+    const orderId = $(e).data('orderid');
 
     $.ajaxSetup({
         headers: {
@@ -57,3 +57,68 @@ function markCancelled(e){
         }
      });
 }
+
+function createItem(){
+    const itemName      = $('#itemName').val();
+    const itemPrice     = $('#itemPrice').val();
+    $('.alert').fadeOut();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/catalog/store',
+        data: {'itemName':itemName,'itemPrice':itemPrice},
+        success: function(data){
+            try {
+                result = JSON.parse(data);
+                if(result['status']){
+                    $('#itemName','#itemName').val('');
+                    $('.alert-success').fadeIn();
+                } else {
+                    $('.alert-danger').fadeIn()
+                }
+            } catch (error) {
+                
+            }
+        }
+     });
+}
+
+function updateItem(id){
+    const itemName      = $('.itemName_'+id).val();
+    const itemPrice     = $('.itemPrice_'+id).val();
+    const enabled       = $('.enabled_'+id).val();
+    $('.alert').fadeOut();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/catalog/update',
+        data: {'itemId':id,'itemName':itemName,'itemPrice':itemPrice,'enabled':enabled},
+        success: function(data){
+            try {
+                result = JSON.parse(data);
+                console.log(result);
+                if(result['status']){
+                    alert('Data saved');
+                } else {
+                    alert('Error in upadting item!! Enter valid values all fields');
+                }
+            } catch (error) {
+                
+            }
+        }
+     });
+}
+
+$('.is_enabled').change(function(){
+    $(this).parent('td').hasClass('table-success') ? 
+        $(this).parent('td').removeClass('table-success').addClass('table-danger'):
+        $(this).parent('td').removeClass('table-danger').addClass('table-success')
+});

@@ -77,7 +77,7 @@
         </main>
     </div>
     
-    <script src="{{ asset('js/hillfarmkart.js') }}"></script>    
+    <script src="{{ asset('js/hillfarmkart.js') }}" defer></script>    
     
 </body>
 </html>

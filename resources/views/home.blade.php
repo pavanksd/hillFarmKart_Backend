@@ -19,7 +19,7 @@
                             <a class="btn btn-outline-dark" href="{{ route('orderlist.index') }}">View orders</a>
                         </div>
                         <div class="col-4">
-                            <a class="btn btn-outline-dark" href="">View Catalog</a>
+                            <a class="btn btn-outline-dark" href="{{ route('catalog.index') }}">View Catalog</a>
                         </div>
 
                         <div class="col-4">
