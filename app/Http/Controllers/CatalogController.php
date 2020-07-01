@@ -27,6 +27,7 @@ class CatalogController extends Controller
             'itemPrice' => ['required', 'Numeric'],
         ];
         $input  = $request->only('itemName', 'itemPrice');
+        $itemImage = $request->file('itemImage')->getClientOriginalName();
         $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
             echo json_encode(['status' => false, 'error' => $validator->messages()]);
@@ -37,6 +38,7 @@ class CatalogController extends Controller
 
         $catalog['item_name'] = $input['itemName'];
         $catalog['price'] = $input['itemPrice'];
+        $catalog['image_name'] = $itemImage;
 
         $result =  $catalog->save();
         echo json_encode(['status'=>$result]);

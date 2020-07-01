@@ -61,6 +61,13 @@ function markCancelled(e){
 function createItem(){
     const itemName      = $('#itemName').val();
     const itemPrice     = $('#itemPrice').val();
+    const itemImage     = $('#imageUpload').prop("files")[0];    
+    
+    const formData = new FormData();
+    formData.append("itemImage", itemImage);
+    formData.append("itemName", itemName);
+    formData.append("itemPrice", itemPrice );
+
     $('.alert').fadeOut();
     $.ajaxSetup({
         headers: {
@@ -70,7 +77,10 @@ function createItem(){
     $.ajax({
         type: 'POST',
         url: '/catalog/store',
-        data: {'itemName':itemName,'itemPrice':itemPrice},
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
         success: function(data){
             try {
                 result = JSON.parse(data);
@@ -104,11 +114,10 @@ function updateItem(id){
         success: function(data){
             try {
                 result = JSON.parse(data);
-                console.log(result);
                 if(result['status']){
                     alert('Data saved');
                 } else {
-                    alert('Error in upadting item!! Enter valid values all fields');
+                    alert('Error in upadting item!! Enter valid values in all fields');
                 }
             } catch (error) {
                 

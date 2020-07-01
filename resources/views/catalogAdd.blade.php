@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Item name</th>
                                 <th>Price</th>
+                                <th style="width:10%">Image</th>
                                 <th style="width:10%"></th>
                             </tr>
                             <tr>
@@ -31,6 +32,9 @@
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" id="itemPrice" >
+                                </td>
+                                <td>
+                                    <input class="btn" type="file" name="imageUpload" id="imageUpload">
                                 </td>                                
                                 <td>
                                     <input type="button" class="btn btn-outline-success" onclick="createItem()" value="create">
@@ -45,7 +49,7 @@
                         </button>
                     </div>
                     <div class="alert alert-danger alert-dismissible" role="alert" style='display:none'>
-                        <p>Error in creating item!! Enter valid values all fields</p>                        
+                        <p>Error in creating item!! Enter valid values in all fields</p>                        
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
